@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Map Data">
+      <UniqueIdentifier>{06785AF3-29C3-42D0-8443-9A88D29C991C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASCII Art">
+      <UniqueIdentifier>{E5CA7A5F-FCC7-4DB9-8EF7-6BA5AC43B09F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{63C24FBA-3DF9-4C6F-B645-D73D3367E4B7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cArquero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCaballero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cGuerrero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cJuego.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cJugador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cMago.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cPais.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cTropa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cMundo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cArquero.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cCaballero.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cGuerrero.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cJuego.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cJugador.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cListaT.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cMago.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cMundo.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cPais.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="cTropa.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="GameEnums.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="Menu.h"><Filter>Header Files</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\maps\argentina.txt"><Filter>Map Data</Filter></None>
+    <None Include="..\assets\maps\latin-america.txt"><Filter>Map Data</Filter></None>
+    <None Include="..\assets\maps\springfield.txt"><Filter>Map Data</Filter></None>
+    <None Include="..\assets\ascii\argentina.txt"><Filter>ASCII Art</Filter></None>
+    <None Include="..\assets\ascii\latin-america.txt"><Filter>ASCII Art</Filter></None>
+    <None Include="..\assets\ascii\springfield.txt"><Filter>ASCII Art</Filter></None>
+    <None Include="..\assets\ascii\title.txt"><Filter>ASCII Art</Filter></None>
+    <None Include="..\assets\ascii\victory.txt"><Filter>ASCII Art</Filter></None>
+    <None Include="..\assets\audio\menu-theme.wav"><Filter>Audio</Filter></None>
+    <None Include="..\assets\audio\argentina-theme.wav"><Filter>Audio</Filter></None>
+    <None Include="..\assets\audio\springfield-theme.wav"><Filter>Audio</Filter></None>
+    <None Include="..\assets\audio\victory-theme.wav"><Filter>Audio</Filter></None>
+  </ItemGroup>
+</Project>

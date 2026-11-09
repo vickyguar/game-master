@@ -10,7 +10,7 @@
 
 #include <string>
 #include <vector>
-#include "Enums.h"
+#include "GameEnums.h"
 #include "cTropa.h"
 
 using namespace std;
@@ -48,7 +48,7 @@ public:
 
 	/**
 	* CalcularAT_Tropas
-	* recibe una lista de tropas (lista pequeña de unidad de ataque), 
+	* recibe una lista de tropas (lista pequeÃ±a de unidad de ataque),
 	* la recorre y acumula los AT de cada unidad en particular. Retorna el acumulador
 	* @param Lista Torpa
 	* @return int
@@ -83,7 +83,7 @@ public:
 	cTropa* VerificarTropa(unsigned int NTropa);
 
 	cListaT<cTropa>* CrearMiniListaRandom();
-	void RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa>* miTropa);
+	void RecibirDanio(unsigned int DaÃ±o, unsigned int AT_ZONA, cListaT<cTropa>* miTropa);
 
 
 #pragma region GETTERS & SETTERS

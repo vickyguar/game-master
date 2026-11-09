@@ -21,7 +21,7 @@ void cMundo::LeerArchivo(const char* Filename)
 	int pos = 0;
 
 	if (fp == NULL)
-		throw new exception(" --- Error al abrir el archivo ---");
+		throw new std::runtime_error(" --- Error al abrir el archivo ---");
 
 	//leo primera linea (son los paises que tiene el mapa)
 	fgets(buffer, 199, fp);
@@ -40,7 +40,7 @@ void cMundo::LeerArchivo(const char* Filename)
 	{
 		string NombrePais = BuscarNombrePais(Cadena, '-', &pos); //busco el nombre del pais que quiero crear
 		PaisesLimitrofes(Limitrofes, NombrePais); //creo la lista de limitrofes + el pais correspondiente
-		Cadena.erase(0, (pos + 1)); //borro el nombre que había encontrado
+		Cadena.erase(0, (pos + 1)); //borro el nombre que habÃ­a encontrado
 
 	} while (pos != Cadena.npos);
 
@@ -52,11 +52,15 @@ void cMundo::LeerArchivo(const char* Filename)
 }
 
 void cMundo::SetNombreMundo(string str) {
-	if (str == "MUNDO 1.txt")
+	const size_t separator = str.find_last_of("/\\");
+	if (separator != string::npos)
+		str = str.substr(separator + 1);
+
+	if (str == "argentina.txt")
 		this->setNombre("Argentina y sus limitrofes");
-	else if (str == "MUNDO 2.txt")
+	else if (str == "latin-america.txt")
 		this->setNombre("America Latina");
-	else if (str == "MUNDO 3.txt")
+	else if (str == "springfield.txt")
 		this->setNombre("Springfield");
 	return;
 }
@@ -121,7 +125,7 @@ string MAPA(const char* filename) {
 		return cadena;
 	}
 	else
-		throw new exception(" --- Error al abrir el archivo ---");
+		throw new std::runtime_error(" --- Error al abrir el archivo ---");
 }
 
 
@@ -130,23 +134,23 @@ void cMundo::Imprimir() const
 	
 	if (Nombre == "America Latina") {
 		system("color 0C");
-		cout << MAPA("ARCHIVO1.txt");
+		cout << MAPA("assets/ascii/latin-america.txt");
 		Sleep(1000);
 	}
 
 	if (Nombre == "Argentina y sus limitrofes") {
 		system("color 0C");
-		PlaySound(TEXT("Vamos Vamos Argentina.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("assets/audio/argentina-theme.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		Sleep(1000);
-		cout << MAPA("ARCHIVO2.txt");
+		cout << MAPA("assets/ascii/argentina.txt");
 		Sleep(6000);
 	}
 
 	if (Nombre == "Springfield") {
 		system("color 06");
-		PlaySound(TEXT("Los Simpson Intro.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("assets/audio/springfield-theme.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		Sleep(1000);
-		cout << MAPA("ARCHIVO4.txt");
+		cout << MAPA("assets/ascii/springfield.txt");
 		Sleep(4000);
 	}
 
@@ -168,11 +172,11 @@ void cMundo::SetUp(const char* Filename)
 	{
 		LeerArchivo(Filename);
 	}
-	catch (exception* ex)
+	catch (std::runtime_error* ex)
 	{
 		string error = ex->what();
 		delete ex;
-		ex = new exception((error + " :: No hay mundo para setear").c_str());
+		ex = new std::runtime_error((error + " :: No hay mundo para setear").c_str());
 		throw ex;
 
 	}

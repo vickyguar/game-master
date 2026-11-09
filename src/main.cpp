@@ -12,11 +12,11 @@
 
 int main()
 {
-	PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("assets/audio/menu-theme.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	srand(time(NULL));
 
 	system("color 0C");
-	cout << Caratula("CARATULA.txt") << endl << endl;
+	cout << Caratula("assets/ascii/title.txt") << endl << endl;
 	cout << "PRESS A KEY TO START " << endl;
 	getchar();
 	
@@ -35,7 +35,7 @@ int main()
 		GAME_MASTER = new cJuego(CANT); 
 		//abro archivo y creo el mundo
 		try { GAME_MASTER->SetUpMundo(Mundo); }
-		catch (exception* ex) { 
+		catch (std::runtime_error* ex) {
 			cout << ex->what(); 
 			delete ex; 
 		}//a esta altura ya tenemos la cantidad de paises
@@ -60,16 +60,16 @@ int main()
 	GAME_MASTER->ImprimirEstados(); //lo que tiene cada jugador (osea sus paises)
 	do
 	{
-		GAME_MASTER->AsignarTurno(); //Se asigna el turno, y se envía alusuario a jugar. 
+		GAME_MASTER->AsignarTurno(); //Se asigna el turno, y se envÃ­a alusuario a jugar.
 
-	} while (GAME_MASTER->getRondas() <= RONDAS_MAX); //las condiciones serían: que haya un ganador o supere un maximo de 10 turnos (cuando hay un ganador se supera el nuemro de rondas)
+	} while (GAME_MASTER->getRondas() <= RONDAS_MAX); //las condiciones serÃ­an: que haya un ganador o supere un maximo de 10 turnos (cuando hay un ganador se supera el nuemro de rondas)
 
 	//se juega mientras que el numero de ronda sea < a 10 o que haya un jugador que haya conquistado el MUNDOOOO!
 	try
 	{
 		if (GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR) != NULL)
 		{
-			PlaySound(TEXT("We Are The Champion.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("assets/audio/victory-theme.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			system("color E4");
 			cout << "\t"<< GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR)->getClave() << endl;
 			cout << GANASTE();
@@ -77,7 +77,7 @@ int main()
 			Sleep(8000);
 		}
 	}
-	catch (runtime_error* ex)
+	catch (std::runtime_error* ex)
 	{
 		delete ex;
 		system("color E5");

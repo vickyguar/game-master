@@ -1,4 +1,4 @@
-﻿///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 //  cJuego.cpp
 //  Implementation of the Class cJuego
 //  Created on:      01-jun.-2021 20:42:39
@@ -71,7 +71,7 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 	}
 	else
 	{
-		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
+		throw new std::runtime_error("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
 		return NULL;
 	}
 
@@ -120,7 +120,7 @@ void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
 		} while (aux == NULL);
 
 		try { (*TropasBatalla) + aux; }
-		catch (exception* ex)
+		catch (std::runtime_error* ex)
 		{
 			cout<<ex->what();
 			delete ex;
@@ -161,7 +161,7 @@ void cJuego::AsignarTurno(){
 				return;
 			}
 		}
-		catch (runtime_error* ex)
+		catch (std::runtime_error* ex)
 		{
 			delete ex; //todavia no hay un ganador
 		}
@@ -188,7 +188,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 			
 			paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
 		}
-		catch (exception* ex)
+		catch (std::runtime_error* ex)
 		{
 			cout << ex->what() << endl;
 			delete ex;
@@ -245,7 +245,7 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef, AT_ZONA_ATACANTE); //calcula el danio base que se va a realizar
 
 	if (JugadorAtacado == NULL)
-		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
+		throw new std::runtime_error("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
 
 	unsigned int AT_Defensa_Base = JugadorAtacado->AtaqueEfectivo(ListaTropaDef, Tropas, AT_ZONA_DEFENSOR);
 
@@ -255,7 +255,7 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 		PaisAtacado->RecibirDanio(AT_Efectivo, AT_ZONA_ATACANTE, ListaTropaDef);
 	}
 
-	catch (exception* ex)
+	catch (std::runtime_error* ex)
 	{
 		system("color 0A");
 		cout << ex->what() << endl; //SI ENTRA ES PORQUE PERDIO EL ATACADO DOMINIO DEL PAIS
@@ -288,18 +288,32 @@ void cJuego::ImprimirEstados() const {
 }
 
 void cJuego::SetUpMundo(unsigned int mundo){
-	
-	string str = "MUNDO " + to_string(mundo)+ ".txt"; //nombre del archivo
-	const char* Filename = str.c_str();
+	string str;
+	switch (mundo)
+	{
+	case 1:
+		str = "assets/maps/argentina.txt";
+		break;
+	case 2:
+		str = "assets/maps/latin-america.txt";
+		break;
+	case 3:
+		str = "assets/maps/springfield.txt";
+		break;
+	default:
+		str = "assets/maps/MUNDO " + to_string(mundo) + ".txt";
+		break;
+	}
+
 	try
 	{
-		Mundo->SetUp(Filename);
+		Mundo->SetUp(str.c_str());
 	}
-	catch (exception* ex)
+	catch (std::runtime_error* ex)
 	{
 		string error = ex->what();
 		delete ex;
-		ex = new exception(("Error en SetUpMundo: " + error).c_str());
+		ex = new std::runtime_error(("Error en SetUpMundo: " + error).c_str());
 		throw ex;
 	}
 }
@@ -328,7 +342,7 @@ cJugador* cJuego::BuscarXEstado(eEstadoJugador estado) const
 	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
 		if ((*Jugadores)[i]->getEstado() == estado)
 			return (*Jugadores)[i];
-	throw new runtime_error("Error en BuscarXEstado");
+	throw new std::runtime_error("Error en BuscarXEstado");
 }
 
 void cJuego::AsignarPaisesRandom()

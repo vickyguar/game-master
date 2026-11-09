@@ -46,7 +46,7 @@ public:
 	unsigned int AT_Extra(cTropa* otra);
 	/**
 	* RecibirDanio
-	* Le resta el AT que recibe la unidad como daño. Recorre la lista, y
+	* Le resta el AT que recibe la unidad como daÃ±o. Recorre la lista, y
 	* por ejemplo, si el AT de ataque es 1000, el primero recibe 100 (muere), 
 	* el segundo recibe 1000-100, etc...
 	* @param int AT_ataque

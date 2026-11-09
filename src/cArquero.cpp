@@ -38,7 +38,7 @@ unsigned int cArquero::Ataque(cGuerrero* Atacado){
 		AT_aux = AT * 0.25; //su ataque aumenta en 0,25
 
 	if (condicion) //si ataco por segunda vez
-		AT_aux += AtaquePorSegunda(Atacado); //volveré a atacar con AT + 50%
+		AT_aux += AtaquePorSegunda(Atacado); //volverÃ© a atacar con AT + 50%
 
 	return AT_aux;
 }

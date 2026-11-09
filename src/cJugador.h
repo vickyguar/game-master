@@ -44,14 +44,14 @@ public:
 	unsigned int AtaqueEfectivo(cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef, unsigned int& AT_ZONA);
 	/**
 	* Defender
-	* el pais atacado se defiende, y recibe el AT del contrincante (el daÒo que le hace)
-	* @param pais atacado, daÒo
+	* el pais atacado se defiende, y recibe el AT del contrincante (el da√±o que le hace)
+	* @param pais atacado, da√±o
 	*/
 	//void Defender(cPais* PaisAtacado, unsigned int AT_Contrincante);
 	/**
 	* Reagrupar
 	* reordena las tropas. Es decir que se pueden juntar, en el caso de que queden pocas unidades
-	* o se pueden separar (para tener m·s unidades)
+	* o se pueden separar (para tener m√°s unidades)
 	*/
 	void Reagrupar(cPais* PaisOrigen, cPais* Destino = NULL);
 	/**

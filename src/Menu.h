@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <stdexcept>
 #include "windows.h"
 
 using namespace std;
@@ -34,7 +35,7 @@ string Caratula(const char* Filename)
 	string Cadena = "";
 
 	if (fp == NULL)
-		throw new exception(" --- Error al abrir el archivo ---");
+		throw new std::runtime_error(" --- Error al abrir el archivo ---");
 
 	while (!feof(fp))
 	{
@@ -151,7 +152,7 @@ void Instrucciones() {
 
 string GANASTE() {
 
-	FILE* fp = fopen("GANASTE.txt", "r");
+	FILE* fp = fopen("assets/ascii/victory.txt", "r");
 	string cadena;
 	char buffer[200] = "";
 
@@ -164,5 +165,5 @@ string GANASTE() {
 		return cadena;
 	}
 	else
-		throw new exception(" --- Error al abrir el archivo ---");
+		throw new std::runtime_error(" --- Error al abrir el archivo ---");
 }

@@ -81,7 +81,7 @@ void cPais::JuntarTropas() { //Pregunto aca las tropas!
 	Valido = true;
 
 	try { this->ValidarTropas(ID1, ID2); }
-	catch (exception* ex) {
+	catch (std::runtime_error* ex) {
 		cout << ex->what();
 		delete ex;
 		Valido = false;
@@ -95,7 +95,7 @@ void cPais::JuntarTropas() { //Pregunto aca las tropas!
 		{
 			(*Tropas->BuscarItem(ID1)) += Tropas->BuscarItem(ID2);
 		}
-		catch (exception* ex)
+		catch (std::runtime_error* ex)
 		{
 			delete ex;
 			return;
@@ -112,14 +112,14 @@ void cPais::ValidarTropas(string ID1, string ID2) {
 		Tropas->BuscarItem(ID1);
 		Tropas->BuscarItem(ID2);
 	}
-	catch (exception* ex) {
+	catch (std::runtime_error* ex) {
 		delete ex;
-		ex = new exception("Algun numero de tropa ingresado no pertenece al pais :(");
+		ex = new std::runtime_error("Algun numero de tropa ingresado no pertenece al pais :(");
 		throw ex;
 	}
 
 	if (!MismoTipo((*Tropas->BuscarItem(ID1)->getGuerreros())[0], (*Tropas->BuscarItem(ID2)->getGuerreros())[0]))
-		throw new exception(("Las tropas " + ID1 + " y " + ID2 + " no son del mismo tipo").c_str());
+		throw new std::runtime_error(("Las tropas " + ID1 + " y " + ID2 + " no son del mismo tipo").c_str());
 
 	return;
 }
@@ -145,7 +145,7 @@ cTropa* cPais::VerificarTropa(unsigned int NTropa)
 	try { 
 		aux = Tropas->BuscarItem(to_string(NTropa)); //EL NUMERO ES EL ID DE LA TROPA
 	} 
-	catch(exception*ex){
+	catch(std::runtime_error*ex){
 		delete ex;
 	}
 	return aux;
@@ -161,7 +161,7 @@ cListaT<cTropa>* cPais::CrearMiniListaRandom()
 	cListaT<cTropa>* aux = new cListaT<cTropa>(true, 3);
 
 	if (Tropas->getCA() > 3) {
-		unsigned int rand1 = 1 + rand() % (Tropas->getCA() - 2);//Que se genere un número random que no incluya los extremos
+		unsigned int rand1 = 1 + rand() % (Tropas->getCA() - 2);//Que se genere un nÃºmero random que no incluya los extremos
 		
 		*aux + (*Tropas)[rand1 - 1];
 		*aux + (*Tropas)[rand1];
@@ -175,7 +175,7 @@ cListaT<cTropa>* cPais::CrearMiniListaRandom()
 	return aux;
 }
 
-void cPais::RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa>* miTropa)
+void cPais::RecibirDanio(unsigned int DaÃ±o, unsigned int AT_ZONA, cListaT<cTropa>* miTropa)
 {
 	for (unsigned int i = 0; i < miTropa->getCA(); i++) //recorro las tropas que mandan a combatir
 	{
@@ -184,18 +184,18 @@ void cPais::RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa
 			if ((*miTropa)[i]->RecibirDanioXZona(AT_ZONA))
 			{
 				cTropa* aux = miTropa->QuitarXPos(i); //saco la tropa que murio de la minilista (la que llega por param)
-				Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque murió en el campo
+				Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque muriÃ³ en el campo
 				//delete aux;
 			}
 		}
-		if ((*miTropa)[i]->RecibirDanio(Daño)) //recibo el daño y si se muere toda la tropa
+		if ((*miTropa)[i]->RecibirDanio(DaÃ±o)) //recibo el daÃ±o y si se muere toda la tropa
 		{
 			cTropa* aux = miTropa->QuitarXPos(i); //saco la tropa que murio de la minilista (la que llega por param)
-			Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque murió en el campo
+			Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque muriÃ³ en el campo
 		}
 	}
 	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que mande se murieron y en el pais tapoco tengo)
-		throw new exception(("\nGanaste el dominio del pais: " + Nombre + " :)").c_str());
+		throw new std::runtime_error(("\nGanaste el dominio del pais: " + Nombre + " :)").c_str());
 	return;
 }
 

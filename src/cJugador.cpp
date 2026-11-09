@@ -90,7 +90,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 				{
 					cPais* aux = Paises->BuscarXPos(pos); //busco al pais
 				}
-				catch (exception* ex)
+				catch (std::runtime_error* ex)
 				{
 					delete ex;
 					condicion = true; //es true cuando no encuentra el pais
@@ -104,7 +104,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 			cin >> opcion; //cantidad de tropas que voy a pasar
 		} while (opcion >= PaisOrigen->getTropas()->getCA() || opcion < 0);
 
-		unsigned int rand1 = rand() % (PaisOrigen->getTropas()->getCA() - opcion);//Que se genere un n˙mero random que no incluya los extremos
+		unsigned int rand1 = rand() % (PaisOrigen->getTropas()->getCA() - opcion);//Que se genere un n√∫mero random que no incluya los extremos
 
 		for (unsigned int i = 0; i < opcion; i++)
 		{
@@ -153,7 +153,7 @@ void cJugador::AgregarTropas()
 void cJugador::GanarPais(cPais* Pais)
 {
 	try { Paises->Agregar(Pais); } //AGREGO EL PAIS A LA LISTA DE JUGADOR
-	catch (exception* ex) { delete ex; }
+	catch (std::runtime_error* ex) { delete ex; }
 }
 
 void cJugador::PerderPais(cPais* Pais)
@@ -193,13 +193,13 @@ bool cJugador::VerificarMiPais(cPais* Pais)
 	{
 		cPais* aux = Paises->BuscarItem(Pais->getClave()); //busco el item en mi lista de paises
 	}
-	catch (exception* ex)
+	catch (std::runtime_error* ex)
 	{
-		delete ex; //no lo encontrÈ
+		delete ex; //no lo encontr√©
 		return false;
 	}
 	
-	return true; //lo encontrÈ :)
+	return true; //lo encontr√© :)
 }
 
 bool cJugador::VerficarAtaque(cPais* Pais)
@@ -230,7 +230,7 @@ bool cJugador::VerifcarPaisDispo()
 
 	for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro la lista de mis paises
 	{
-		if (((*Paises)[i]->getTropas()->getCA() > 1)) //tengo al menos un pais que tiene m·s de una tropa (puede atacar)
+		if (((*Paises)[i]->getTropas()->getCA() > 1)) //tengo al menos un pais que tiene m√°s de una tropa (puede atacar)
 			return true;
 	}
 	return false; //no tengo otro pais para atacar (F) :(

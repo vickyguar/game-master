@@ -8,6 +8,7 @@
 #if !defined(EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_)
 #define EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_
 
+#include <stdexcept>
 #include "cMundo.h"
 
 class cJugador;
@@ -92,7 +93,7 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 		return Residuo;
 	}
 	else
-		throw new exception(" --- Division por cero --- ");
+		throw new std::runtime_error(" --- Division por cero --- ");
 }
 
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <ostream>
+#include <stdexcept>
 
 #define NMAX 50
 using namespace std;
@@ -76,10 +77,10 @@ template<class T>
 inline void cListaT<T>::operator+(T* newItem)
 {
 	try { Agregar(newItem); }
-	catch (exception* ex) {
+	catch (std::runtime_error* ex) {
 		string error = ex->what();
 		delete ex;
-		ex = new exception(("Error al usar operator+: " + error).c_str());
+		ex = new std::runtime_error(("Error al usar operator+: " + error).c_str());
 		throw ex;
 	}
 	return;
@@ -130,14 +131,14 @@ void cListaT<T>::Agregar(T* newItem)
 		try {
 			int pos = getIndex(newItem->getClave()); //busco el elemento en la lista
 		}
-		catch (exception* ex) { //si el elemento no existe
+		catch (std::runtime_error* ex) { //si el elemento no existe
 			delete ex;
 			Lista[CA++] = newItem; //lo agrego a la lista
 			return;
 		}
-		throw new exception("El item ya esta en la lista");
+		throw new std::runtime_error("El item ya esta en la lista");
 	}
-	throw new exception("El nuevo item que se desea agregar a la lista es NULL");
+	throw new std::runtime_error("El nuevo item que se desea agregar a la lista es NULL");
 }
 
 template<class T>
@@ -145,10 +146,10 @@ T* cListaT<T>::Quitar(const string Key)
 {
 	int pos = -1;
 	try { pos = getIndex(Key); } //busco el elemento
-	catch (exception* ex) {
+	catch (std::runtime_error* ex) {
 		string error = ex->what();
 		delete ex;
-		ex = new exception(("No se puede quitar el item: " + error).c_str());
+		ex = new std::runtime_error(("No se puede quitar el item: " + error).c_str());
 		throw ex;
 	}
 	T* aux = Lista[pos]; // si lo encuentra lo guardo
@@ -165,10 +166,10 @@ inline T* cListaT<T>::QuitarXPos(unsigned int pos)
 {
 	T* aux = NULL;
 	try { aux = BuscarXPos(pos); } //busco el elemento
-	catch (exception* ex) {
+	catch (std::runtime_error* ex) {
 		string error = ex->what();
 		delete ex;
-		ex = new exception(("No se puede quitar el item: " + error).c_str());
+		ex = new std::runtime_error(("No se puede quitar el item: " + error).c_str());
 		throw ex;
 	}
 	for (unsigned int i = pos; i < CA - 1; i++)
@@ -186,16 +187,16 @@ void cListaT<T>::Eliminar(unsigned int pos)
 	if (Lista != NULL)
 	{
 		try { aux = QuitarXPos(pos); }
-		catch (exception* ex) {
+		catch (std::runtime_error* ex) {
 			string error = ex->what();
 			delete ex;
-			ex = new exception(("No se puede eliminar el item: " + error).c_str());
+			ex = new std::runtime_error(("No se puede eliminar el item: " + error).c_str());
 			throw ex;
 		}
 		delete aux;
 		return;
 	}
-	throw new exception("Error al eliminar: la lista es NULL");
+	throw new std::runtime_error("Error al eliminar: la lista es NULL");
 }
 
 template<class T>
@@ -229,23 +230,23 @@ T* cListaT<T>::BuscarItem(const string Key)
 	{
 		
 		try { pos = getIndex(Key); }
-		catch (exception* ex) {
+		catch (std::runtime_error* ex) {
 			string error = ex->what();
 			delete ex;
-			ex = new exception(("Error al buscar item: " + error).c_str());
+			ex = new std::runtime_error(("Error al buscar item: " + error).c_str());
 			throw ex;
 		}
 		return Lista[pos];
 		
 	}
-	throw new exception("Error al buscar el item");
+	throw new std::runtime_error("Error al buscar el item");
 }
 
 template<class T>
 T* cListaT<T>::BuscarXPos(unsigned int Index)
 {
 	if (Index < 0 ||Index > CA)
-		throw new exception(("La posicion " + to_string(Index) + " no existe en la lista").c_str());
+		throw new std::runtime_error(("La posicion " + to_string(Index) + " no existe en la lista").c_str());
 	return Lista[Index];
 }
 
@@ -257,7 +258,7 @@ unsigned int cListaT<T>::getIndex(const string Key) const
 		if (Lista[i]->getClave() == Key)
 			return i;
 	}
-	throw new exception((Key + " el item no existe").c_str());
+	throw new std::runtime_error((Key + " el item no existe").c_str());
 }
 
 template<class T>
@@ -291,11 +292,11 @@ inline void cListaT<T>::operator-(unsigned int pos)
 	{
 		Eliminar(pos);
 	}
-	catch (exception* ex)
+	catch (std::runtime_error* ex)
 	{
 		string error = ex->what();
 		delete ex;
-		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir una pos").c_str());
+		ex = new std::runtime_error((error + " :: No se pudo eliminar con el operator al recibir una pos").c_str());
 		throw ex;
 	}
 }
@@ -307,11 +308,11 @@ inline void cListaT<T>::operator-(T*obj)
 		unsigned int pos=getIndex(obj->getClave());
 		Eliminar(pos);
 	}
-	catch (exception* ex)
+	catch (std::runtime_error* ex)
 	{
 		string error = ex->what();
 		delete ex;
-		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir un objeto").c_str()); 
+		ex = new std::runtime_error((error + " :: No se pudo eliminar con el operator al recibir un objeto").c_str());
 		throw ex;
 
 	}

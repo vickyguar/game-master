@@ -51,13 +51,13 @@ public:
 	virtual unsigned int Ataque(cGuerrero* Atacado) = 0; //Podemos hacerlo como los chicos con un template
 	/**
 	* CalcularDanio
-	* calcula el numero de daño que genera la unidad
+	* calcula el numero de daÃ±o que genera la unidad
 	* @return int
 	*/
 	/*virtual unsigned int CalcularDanio() const = 0;*/
 	unsigned int getHP() { return HP_Actual; }
-	inline void setHP(unsigned int Daño) { HP_Actual= HP_Actual-Daño; }
-	void operator-=(unsigned int daño) { setHP(daño); }
+	inline void setHP(unsigned int DaÃ±o) { HP_Actual= HP_Actual-DaÃ±o; }
+	void operator-=(unsigned int daÃ±o) { setHP(daÃ±o); }
 	bool VerificarVida() { return (HP_Actual <= HP_Inicial * 0.1); }
 	string getClave() const { return ID; }
 };

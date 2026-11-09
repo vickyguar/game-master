@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 #include "cTropa.h"
-#include "Enums.h"
+#include "GameEnums.h"
 
 class cMago;
 class cCaballero;
@@ -132,7 +132,7 @@ string cTropa::To_string()
 
 bool cTropa::RecibirDanio(int AT_Ataque) {
 
-	OrdenarXHP(); //ordeno de m·s vida a menod vida
+	OrdenarXHP(); //ordeno de m√°s vida a menod vida
 	unsigned int i = 0;
 	do
 	{
@@ -155,12 +155,12 @@ bool cTropa::RecibirDanio(int AT_Ataque) {
 		delete Guerreros; //bai bai
 		return true; //no tengo tropa
 	}
-	return false; //todavÌa tendo tropa ;)
+	return false; //todav√≠a tendo tropa ;)
 }
 
 bool cTropa::RecibirDanioXZona(int AT_Ataque)
 {
-	OrdenarXHP(); //ordeno de m·s vida a menod vida
+	OrdenarXHP(); //ordeno de m√°s vida a menod vida
 
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++) //recorro la lista de guerreros
 	{
@@ -175,7 +175,7 @@ bool cTropa::RecibirDanioXZona(int AT_Ataque)
 		return true; //no tengo tropa
 	}
 
-	return false; //todavÌa tendo tropa ;)
+	return false; //todav√≠a tendo tropa ;)
 }
 
 cTropa& cTropa::operator+=(cTropa* TropaAnadida)
